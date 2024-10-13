@@ -1,45 +1,86 @@
 body {
-    background: color #f9f7fe;
-    font-family: Roboto,san sans-serif;
+    background-color:  #f9f7fe;
+    font-family: Roboto,sans-serif;
 }
 .weather-app {
     background-color: white;
-    max-width: 600px;
+    max-width: 500px;
     margin: 30px auto;
     display: block;
     padding: 48px;
     box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
-    border-radius: 0ch10px;
+    border-radius: 15px;
+    text-align: left;
 }
 .search-form {
     background-color: #f9f7fe;
     width: 400px;
-    max-width: 600px;
-    font-size: medium;
+    font-size: 20px;
+    border: 1rem;
     border: none;
     border-radius: 8px;
     padding: 10px;
+    margin-right: 10px;
 
-.weather-info {
-    font-weight: bold;
-}
 }
 .search-form-button {
     background-color: blueviolet;
     color: white;
-    width: 80px;
-    max-width: 600px;
     border-radius:8px;
-    padding: 10px;
-}
-.time {
-    margin: 0 auto;
-}
-.condition {
-    font-size: 18px;
     font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.search-form-button:hover {
+    background-color: #6d22b7;
+}
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.weather-details {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    align-items: flex-start;
+}
+.temp-input {
+    display: flex;
+    align-items: right;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: auto;
+}
+#temperature {
+    font-size: 3rem;
+    font-weight: bold;
+}
+#percentage {
+    color: red;
+    font-weight: bold;
+}
+#wind-speed {
+    color: red;
+    font-weight: bold;
+}
+h1#city-name {
+    font-size: 2rem;
+    margin: 0;
+}
+p#time, p#condition {
+    margin: 0;
+    font-size: 1rem;
+}
+.temp-unit {
+    font-size: 2rem;
+    vertical-align: super;
 }
 .footer-input {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
 }

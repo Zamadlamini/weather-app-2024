@@ -12,23 +12,28 @@
 <body>
     <div class="weather-app">
     <header>
-        <form>
-            <input type="text" placeholder="Enter a city..." required class="search-form">
-            <input type="button" value="Search" class="search-form-button">
+        <form id="search-form">
+            <input type="text" id="city-input" placeholder="Enter a city..." required class="search-form">
+            <input type="submit" value="Search" class="search-form-button">
         </form>
     </header>
-    <div class="Weather-info">
-        <h1>Paris</h1>
+    <div class="weather-info">
+        <div class="weather-details">
+        <h1 id="city-name">Paris</h1>
         <p id="time">Tuesday 19:13,Clear Sky</p>
-        <p id="condition">Humidity: 87%, Wind: 4.63km/h</p>
-        <span id="temperature">🌥️ 14C</span>
+        <p id="condition">Humidity: <span id="percentage">87%</span>, Wind: <span id="wind-speed">4.63km/h</span></p>
+    </div>
+    <div class="temp-input">
+        <span id="temperature">🌥️14</span><span class="temp-unit">°C</span>
+    </div>  
     </div>
     <footer class="footer-input">
        This project was coded with❤️by
-       <a href="#">Zama Dlamini</a> and is
-        <a href="#">on GitHub</a> and is hosted
-        <a href="#"> on Netlify</a>
+       <a href="#">Zama Dlamini</a> and is on
+        <a href="#">GitHub</a> and is hosted on
+        <a href="#">Netlify</a>
     </footer>
-</body>
 </div>
+<script src="src/index.js"></script>
+</body>
 </html></html>
