@@ -26,6 +26,7 @@ async function getWeatherData(city) {
         }
 
         const data = await response.json();
+        console.log(data);
         
         // Update the HTML elements with fetched data
         cityName.textContent = data.name; // City name
@@ -83,5 +84,5 @@ function formatFullDate(date) {
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
     return date.toLocaleDateString('en-GB', options);
 }
-console.log(data);
+
 
