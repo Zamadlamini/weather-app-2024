@@ -8,6 +8,8 @@ const temperatureElement = document.getElementById('temperature');
 const percentageElement = document.getElementById('percentage');
 const windSpeedElement = document.getElementById('wind-speed');
 
+let timezoneOffset; // Variable to hold the timezone offset
+
 form.addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent the form from submitting in the traditional way
 
@@ -32,21 +34,33 @@ async function getWeatherData(city) {
         percentageElement.textContent = `${data.main.humidity}%`; // Humidity
         windSpeedElement.textContent = `${data.wind.speed} km/h`; // Wind speed
         
-        // Adjust time based on the city's timezone
-        const timezoneOffset = data.timezone; // Timezone offset in seconds
-        const localDate = new Date(); // Get the current UTC date and time
-        const localTime = new Date(localDate.getTime() + timezoneOffset * 1000); // Adjust time based on the timezone offset
+        // Set the timezone offset for the city
+        timezoneOffset = data.timezone; // Timezone offset in seconds
 
-        const fullDate = formatFullDate(localTime); // Format the date
-        const time = localTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        // Update time display
+        updateTime();
 
-        // Display the local time and full date
-        timeElement.textContent = `${fullDate} ${localTime.toLocaleDateString('en-GB', { weekday: 'long' })} ${time}`;
+        // Call the updateTime function every minute
+        setInterval(updateTime, 60000); // Update every minute
+
+        // Display condition
         conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); // Weather condition
 
     } catch (error) {
         alert(error.message); // Alert if an error occurs
     }
+}
+
+// Function to update the displayed time
+function updateTime() {
+    const localDate = new Date(); // Get the current UTC date and time
+    const localTime = new Date(localDate.getTime() + timezoneOffset * 1000); // Adjust time based on the timezone offset
+
+    const fullDate = formatFullDate(localTime); // Format the date
+    const time = localTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Display the local time and full date
+    timeElement.textContent = `${fullDate} ${localTime.toLocaleDateString('en-GB', { weekday: 'long' })} ${time}`;
 }
 
 // Function to determine emoji based on temperature
