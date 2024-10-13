@@ -10,8 +10,9 @@ const windSpeedElement = document.getElementById('wind-speed');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault(); 
+
     const city = cityInput.value; 
-    await getWeatherData(city);
+    await getWeatherData(city); 
     cityInput.value = ''; 
 });
 
@@ -23,23 +24,24 @@ async function getWeatherData(city) {
         }
 
         const data = await response.json();
-       
+        
         cityName.textContent = data.name; 
         const temp = Math.round(data.main.temp); 
         temperatureElement.textContent = `${getEmoji(temp)} ${temp}`; 
         percentageElement.textContent = `${data.main.humidity}%`; 
         windSpeedElement.textContent = `${data.wind.speed} km/h`; 
         
+        
         const date = new Date();
-        const options = { weekday: 'long', hour: '2-digit', minute: '2-digit' };
-        timeElement.textContent = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], options)}`;
+        const fullDate = formatFullDate(date); 
+        const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        timeElement.textContent = `${fullDate} ${time}`; 
         conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); // Weather condition
 
     } catch (error) {
         alert(error.message); 
     }
 }
-
 
 function getEmoji(temp) {
     if (temp < 0) {
@@ -54,7 +56,8 @@ function getEmoji(temp) {
         return '🔥'; // Fire for temperatures 30°C and above
     }
 }
+
 function formatFullDate(date) {
-    const options = { day: 'numeric', month: 'short', year:'numeric'};
-    return date.toLocaleDateString('enGB',options);
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    return date.toLocaleDateString('en-GB', options);
 }
