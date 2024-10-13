@@ -54,3 +54,7 @@ function getEmoji(temp) {
         return '🔥'; // Fire for temperatures 30°C and above
     }
 }
+function formatFullDate(date) {
+    const options = { day: 'numeric', month: 'short', year:'numeric'};
+    return date.toLocaleDateString('enGB',options);
+}
