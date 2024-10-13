@@ -42,8 +42,7 @@ async function getWeatherData(city) {
 
         
         timeElement.textContent = `${fullDate} ${localTime.toLocaleDateString('en-GB', { weekday: 'long' })} ${time}`;
-        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); // Weather condition
-
+        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); 
     } catch (error) {
         alert(error.message); 
     }
