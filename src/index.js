@@ -26,7 +26,8 @@ async function getWeatherData(city) {
         const data = await response.json();
         // Update the HTML elements with fetched data
         cityName.textContent = data.name; // City name
-        temperatureElement.textContent = `🌥️${Math.round(data.main.temp)}`; // Temperature
+        const temp = Math.round(data.main.temp); // Temperature
+        temperatureElement.textContent = `${getEmoji(temp)} ${temp}`; // Emoji + Temperature
         percentageElement.textContent = `${data.main.humidity}%`; // Humidity
         windSpeedElement.textContent = `${data.wind.speed} km/h`; // Wind speed
         
@@ -38,5 +39,20 @@ async function getWeatherData(city) {
 
     } catch (error) {
         alert(error.message); // Alert if an error occurs
+    }
+}
+
+// Function to determine emoji based on temperature
+function getEmoji(temp) {
+    if (temp < 0) {
+        return '❄️'; // Snowflake for temperatures below 0°C
+    } else if (temp < 10) {
+        return '🌬️'; // Wind for temperatures below 10°C
+    } else if (temp < 20) {
+        return '🌤️'; // Sun with a cloud for temperatures below 20°C
+    } else if (temp < 30) {
+        return '☀️'; // Sun for temperatures below 30°C
+    } else {
+        return '🔥'; // Fire for temperatures 30°C and above
     }
 }
