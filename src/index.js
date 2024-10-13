@@ -9,46 +9,47 @@ const percentageElement = document.getElementById('percentage');
 const windSpeedElement = document.getElementById('wind-speed');
 
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); 
+    event.preventDefault(); // Prevent the form from submitting in the traditional way
 
-    const city = cityInput.value; 
-    await getWeatherData(city); 
-    cityInput.value = ''; 
+    const city = cityInput.value; // Get the value from the input
+    await getWeatherData(city); // Fetch and display weather data
+    cityInput.value = ''; // Clear the input field after search
 });
 
 async function getWeatherData(city) {
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
         if (!response.ok) {
-            throw new Error('City not found'); 
+            throw new Error('City not found'); // Handle errors if the city is not found
         }
 
         const data = await response.json();
         
+        // Update the HTML elements with fetched data
+        cityName.textContent = data.name; // City name
+        const temp = Math.round(data.main.temp); // Temperature
+        temperatureElement.textContent = `${getEmoji(temp)} ${temp}`; // Emoji + Temperature
+        percentageElement.textContent = `${data.main.humidity}%`; // Humidity
+        windSpeedElement.textContent = `${data.wind.speed} km/h`; // Wind speed
         
-        cityName.textContent = data.name; 
-        const temp = Math.round(data.main.temp); 
-        temperatureElement.textContent = `${getEmoji(temp)} ${temp}`; 
-        percentageElement.textContent = `${data.main.humidity}%`; 
-        windSpeedElement.textContent = `${data.wind.speed} km/h`; 
-        
-        
-        const timezoneOffset = data.timezone; 
-        const localDate = new Date(); 
-        const localTime = new Date(localDate.getTime() + timezoneOffset * 1000); 
+        // Adjust time based on the city's timezone
+        const timezoneOffset = data.timezone; // Timezone offset in seconds
+        const localDate = new Date(); // Get the current UTC date and time
+        const localTime = new Date(localDate.getTime() + timezoneOffset * 1000); // Adjust time based on the timezone offset
 
-        const fullDate = formatFullDate(localTime); 
+        const fullDate = formatFullDate(localTime); // Format the date
         const time = localTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        
+        // Display the local time and full date
         timeElement.textContent = `${fullDate} ${localTime.toLocaleDateString('en-GB', { weekday: 'long' })} ${time}`;
-        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); 
+        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); // Weather condition
+
     } catch (error) {
-        alert(error.message); 
+        alert(error.message); // Alert if an error occurs
     }
 }
 
-
+// Function to determine emoji based on temperature
 function getEmoji(temp) {
     if (temp < 0) {
         return '❄️'; // Snowflake for temperatures below 0°C
@@ -63,7 +64,7 @@ function getEmoji(temp) {
     }
 }
 
-
+// Function to format date in '13 Nov 2024' format
 function formatFullDate(date) {
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
     return date.toLocaleDateString('en-GB', options);
