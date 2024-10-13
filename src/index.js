@@ -83,3 +83,5 @@ function formatFullDate(date) {
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
     return date.toLocaleDateString('en-GB', options);
 }
+console.log(data);
+
