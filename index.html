@@ -10,21 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="Weather-app">
+    <div class="weather-app">
     <header>
         <form>
             <input type="text" placeholder="Enter a city..." required class="search-form">
             <input type="button" value="Search" class="search-form-button">
         </form>
     </header>
-    <p>
-        Paris
-        <br>
-        Tuesday 19:13,clear sky <br>
-        Humidity: 87%, Wind: 4.63km/h <br>
-        🌥️ 14C
-    </p>
-    <footer>
+    <div class="Weather-info">
+        <h1>Paris</h1>
+        <p id="time">Tuesday 19:13,Clear Sky</p>
+        <p id="condition">Humidity: 87%, Wind: 4.63km/h</p>
+        <span id="temperature">🌥️ 14C</span>
+    </div>
+    <footer class="footer-input">
        This project was coded with❤️by
        <a href="#">Zama Dlamini</a> and is
         <a href="#">on GitHub</a> and is hosted

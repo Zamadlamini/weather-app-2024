@@ -13,13 +13,33 @@ body {
 }
 .search-form {
     background-color: #f9f7fe;
-    max-width: 200px;
+    width: 400px;
+    max-width: 600px;
     font-size: medium;
     border: none;
     border-radius: 8px;
+    padding: 10px;
+
+.weather-info {
+    font-weight: bold;
+}
 }
 .search-form-button {
-    color: blueviolet;
-    max-width: 20px;
-    border-radius:8px ;
+    background-color: blueviolet;
+    color: white;
+    width: 80px;
+    max-width: 600px;
+    border-radius:8px;
+    padding: 10px;
+}
+.time {
+    margin: 0 auto;
+}
+.condition {
+    font-size: 18px;
+    font-weight: bold;
+}
+.footer-input {
+    text-align: center;
+    margin-top: 10px;
 }
