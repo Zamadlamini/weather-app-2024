@@ -10,7 +10,7 @@ const windSpeedElement = document.getElementById('wind-speed');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault(); 
-
+    
     const city = cityInput.value; 
     await getWeatherData(city); 
     cityInput.value = ''; 
@@ -25,23 +25,30 @@ async function getWeatherData(city) {
 
         const data = await response.json();
         
+       
         cityName.textContent = data.name; 
         const temp = Math.round(data.main.temp); 
         temperatureElement.textContent = `${getEmoji(temp)} ${temp}`; 
         percentageElement.textContent = `${data.main.humidity}%`; 
         windSpeedElement.textContent = `${data.wind.speed} km/h`; 
         
+        e
+        const timezoneOffset = data.timezone; 
+        const localDate = new Date(); 
+        const localTime = new Date(localDate.getTime() + timezoneOffset * 1000); 
+
+        const fullDate = formatFullDate(localTime); 
+        const time = localTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
         
-        const date = new Date();
-        const fullDate = formatFullDate(date); 
-        const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        timeElement.textContent = `${fullDate} ${time}`; 
-        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); // Weather condition
+        timeElement.textContent = `${fullDate} ${localTime.toLocaleDateString('en-GB', { weekday: 'long' })} ${time}`;
+        conditionElement.textContent = data.weather[0].description.charAt(0).toUpperCase() + data.weather[0].description.slice(1); 
 
     } catch (error) {
         alert(error.message); 
     }
 }
+
 
 function getEmoji(temp) {
     if (temp < 0) {
@@ -56,6 +63,7 @@ function getEmoji(temp) {
         return '🔥'; // Fire for temperatures 30°C and above
     }
 }
+
 
 function formatFullDate(date) {
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
