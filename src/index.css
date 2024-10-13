@@ -4,7 +4,7 @@ body {
 }
 .weather-app {
     background-color: white;
-    max-width: 500px;
+    max-width: 600px;
     margin: 30px auto;
     display: block;
     padding: 48px;
@@ -20,12 +20,13 @@ body {
     border: none;
     border-radius: 8px;
     padding: 10px;
-    margin-right: 10px;
+    margin-right: 8px;
 
 }
 .search-form-button {
     background-color: blueviolet;
     color: white;
+    width: 80px;
     border-radius:8px;
     font-weight: bold;
     font-size: 1rem;
@@ -35,7 +36,7 @@ body {
     transition: background-color 0.3s ease;
 }
 .search-form-button:hover {
-    background-color: #6d22b7;
+    background-color: #ba87ec;
 }
 .weather-info {
     display: flex;
@@ -71,6 +72,7 @@ body {
 h1#city-name {
     font-size: 2rem;
     margin: 0;
+    font-weight: bold;
 }
 p#time, p#condition {
     margin: 0;
